@@ -16,7 +16,7 @@ The **Bike Data Processor** application fetches bike station data from an API, t
 
 ### Demo link
 
-API Gateway URL for demo: https://i9uq8babz8.execute-api.us-east-2.amazonaws.com/prod/process-data?token=b478654f864f326ff674b806c4b4f4b0
+API Gateway URL for demo: https://i9uq8babz8.execute-api.us-east-2.amazonaws.com/prod/process-data
 
 ## Setup and Usage
 
