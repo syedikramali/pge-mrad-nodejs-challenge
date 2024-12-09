@@ -16,7 +16,11 @@ The **Bike Data Processor** application fetches bike station data from an API, t
 
 ### Demo link
 
-API Gateway URL for demo: https://i9uq8babz8.execute-api.us-east-2.amazonaws.com/prod/process-data
+You can use the following API Gateway URL to trigger the demo:
+https://i9uq8babz8.execute-api.us-east-2.amazonaws.com/prod/process-data
+
+After successfully invoking the endpoint, you can view the transformed data at:
+https://nodejs-pg-e-data.s3.amazonaws.com/output.csv.
 
 ## Setup and Usage
 
@@ -29,12 +33,14 @@ API Gateway URL for demo: https://i9uq8babz8.execute-api.us-east-2.amazonaws.com
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/syedikramali/pge-mrad-nodejs-challenge.git
    cd pge-mrad-nodejs-challenge
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -66,6 +72,7 @@ To store the output CSV file, you need an S3 bucket. Follow these steps to creat
 ### Running Locally
 
 1. Run the application:
+
    ```bash
    npm start
    ```
@@ -81,35 +88,37 @@ To store the output CSV file, you need an S3 bucket. Follow these steps to creat
 #### With Docker
 
 1. Build the Docker image:
+
    ```bash
    docker build -t bike-data-processor .
    ```
 
-3. Run the Docker container:
+2. Run the Docker container:
    ```bash
    docker run --env-file .env bike-data-processor
    ```
    make sure to add the .env and update env variables
 
-
-
 ### Deploying to AWS Lambda
 
 1. **Prepare the Deployment Package**:
+
    - Install production dependencies:
      ```bash
      npm install --production
      ```
    - Create a ZIP file for deployment:
      ```bash
-     zip -r lambda-deployment.zip node_modules src index.js package.json 
+     zip -r lambda-deployment.zip node_modules src index.js package.json
      ```
 
 2. **Deploy to AWS Lambda**:
+
    - Create or update a Lambda function in the AWS Management Console.
    - Upload the `lambda-deployment.zip` file.
 
 3. **Add Environment Variables to Lambda**:
+
    - Navigate to the **Configuration** tab of your Lambda function.
    - Select **Environment variables** and click **Edit**.
    - Add the following variables:
@@ -140,11 +149,13 @@ pge-mrad-nodejs-challenge/
 ## Testing
 
 1. Install development dependencies:
+
    ```bash
    npm install --save-dev jest
    ```
 
 2. Run the tests:
+
    ```bash
    npm test
    ```
@@ -165,15 +176,13 @@ Ensure the Lambda function has the following permissions or just give `AmazonS3F
   "Statement": [
     {
       "Effect": "Allow",
-      "Action": [
-        "s3:PutObject",
-        "s3:GetObject"
-      ],
+      "Action": ["s3:PutObject", "s3:GetObject"],
       "Resource": "arn:aws:s3:::your-s3-bucket-name/*"
     }
   ]
 }
 ```
+
 ## Known Limitations
 
 - AWS Lambda has a writable `/tmp` directory limited to 512MB.
