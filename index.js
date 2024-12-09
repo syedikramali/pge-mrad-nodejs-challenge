@@ -4,6 +4,6 @@ exports.handler = async (event) => {
   const result = await processBikeData(true);
   return {
     statusCode: 200,
-    body: { message: result },
+    body: JSON.stringify({ message: result }),
   };
 };
